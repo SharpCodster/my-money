@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoggerService } from './core/logger/log.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,17 @@ import { LoggerService } from './core/logger/log.service';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'MyMoney';
 
+  message = '';
+
   constructor(
-    private logger: LoggerService
-  ) {
+    private logger: LoggerService,
+    private http: HttpClient
+    ) {
 
     this.logger.debug('AppComponent ctor!!')
+
+    this.http.get('/api/GetConfigUrl')
+      .subscribe((resp: any) => this.message = resp.url);
   }
 
   ngOnInit() {
