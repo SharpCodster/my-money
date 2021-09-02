@@ -9,6 +9,8 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { Configuration } from './core/configuration/configuration';
+
 import { environment } from './../environments/environment';
 
 import { LoggerService } from './core/logger/log.service';
@@ -21,17 +23,25 @@ export function onAppInit(
 
     logService.info('APP INITIALIZER STARTING');
     
-    let confUrl: string;
+    const promise = new Promise((resolve, reject) => {
 
-    if (environment.production) {
-      http.get('/api/GetConfigUrl')
-        .subscribe((resp: any) => 
-          confUrl = resp.url);
-    } else {
-      confUrl = environment.configurationUrl;
-    }
+      http.get('/api/GetConfigUrl').toPromise().then(
+        (resp: any) => {
+          configurationService.init(resp.url).toPromise().then(
+            (resp: Configuration) => {
+              resolve(resp);
+            }
+          )
+        }, (reason: any) => {
+          configurationService.init(environment.configurationUrl).toPromise().then(
+            (resp: Configuration) => {
+              resolve(resp);
+            }
+          )
+      });
+    });
 
-    return () => configurationService.init(confUrl).toPromise();
+    return () => promise;
 }
 
 
@@ -53,7 +63,7 @@ export function onAppInit(
     {
       provide: APP_INITIALIZER,
       useFactory: onAppInit,
-      deps: [LoggerService, ConfigurationService],
+      deps: [LoggerService, ConfigurationService, HttpClient],
       multi: true
     }],
   bootstrap: [AppComponent]
