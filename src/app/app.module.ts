@@ -21,11 +21,12 @@ export function onAppInit(
 
     logService.info('APP INITIALIZER STARTING');
     
-    let confUrl: string = "http://localhost:55396/MyMoney/Configuration";
+    let confUrl: string;
 
     if (environment.production) {
-      http.get('/api/message').subscribe((resp: any) => confUrl = resp.text);
-      //confUrl = process.env.ConfigurationUrl as string;
+      http.get('/api/GetConfigUrl')
+        .subscribe((resp: any) => 
+          confUrl = resp.url);
     } else {
       confUrl = environment.configurationUrl;
     }
