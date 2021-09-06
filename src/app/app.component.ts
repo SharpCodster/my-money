@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoggerService } from './core/logger/log.service';
-import { HttpClient } from '@angular/common/http';
+import { NotifierService } from './core/notifier/notifier.service';
+import { AuthService } from './core/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,17 +13,64 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'MyMoney';
 
   constructor(
-    private logger: LoggerService
+    private logger: LoggerService,
+    private authService: AuthService,
+    private router: Router,
+    private notifier: NotifierService
     ) {
 
     this.logger.debug('AppComponent ctor!!')
   }
-
+  
   ngOnInit() {
+
+    this.logger.info('AppComponent, checking authentication...');
+
+    this.authService.isLoggedIn().then((isAuthenticated: boolean) => {
+      if (!isAuthenticated) {
+        if ('/login' !== window.location.pathname
+            && '/password-reset' !== window.location.pathname 
+            && '/confirm-email' !== window.location.pathname) {
+          this.write('redirect', window.location.pathname);
+          this.router.navigate(['/login']);
+        }
+      } else {
+        this.navigateToStoredEndpoint();
+      }
+
+    });
+
+    this.notifier.unbusy();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
+  }
 
+  private navigateToStoredEndpoint() {
+    const path = this.read('redirect');
+
+    if (!path || this.router.url === path) {
+      return;
+    }
+
+    if (path.toString().includes('/unauthorized')) {
+      this.router.navigate(['/']);
+    } else {
+      this.router.navigate([path]);
+    }
+  }
+
+  private read(key: string): any {
+    const data = localStorage.getItem(key);
+    if (data) {
+      return JSON.parse(data);
+    }
+
+    return;
+  }
+
+  private write(key: string, value: any): void {
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
 }

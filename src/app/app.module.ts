@@ -1,12 +1,12 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule, DatePipe } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
+//import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { Configuration } from './core/configuration/configuration';
@@ -15,11 +15,21 @@ import { environment } from './../environments/environment';
 
 import { LoggerService } from './core/logger/log.service';
 import { ConfigurationService } from './core/configuration/configuration.service';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+
+import {  ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
+
+import { AuthService } from './core/auth/auth.service';
+
+import { ShellModule } from './shell/shell.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export function onAppInit(
   logService: LoggerService,
   configurationService: ConfigurationService,
-  http: HttpClient) {
+  http: HttpClient,
+  authService: AuthService) {
 
     logService.info('APP INITIALIZER STARTING');
     
@@ -44,28 +54,62 @@ export function onAppInit(
     return () => promise;
 }
 
+const routes = [
+  {
+    path: 'login',
+    component: LoginPageComponent
+  },
+  {
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: '/page-not-found'
+  }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    RouterModule,
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    //AppRoutingModule,
+    RouterModule.forRoot(
+      routes,
+      {
+        enableTracing: true
+      }
+    ),
+    ShellModule,
     CommonModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [DatePipe,
+  providers: [
+    DatePipe,
     {
       provide: APP_INITIALIZER,
       useFactory: onAppInit,
-      deps: [LoggerService, ConfigurationService, HttpClient],
+      deps: [LoggerService, ConfigurationService, HttpClient, AuthService],
       multi: true
-    }],
+    },
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: JwtInterceptor,
+      multi: true 
+    },
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: ErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
