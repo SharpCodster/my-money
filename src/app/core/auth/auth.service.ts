@@ -4,7 +4,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from './user.model';
 import { ConfigurationService } from '../configuration/configuration.service';
-//import { of } from 'rxjs/add/observable';
+import { LoggerService } from '../logger/log.service';
+import * as moment from 'moment';
 
 @Injectable({
     providedIn: 'root'
@@ -15,11 +16,26 @@ export class AuthService {
     public currentUser: Observable<User>;
 
     constructor(private http: HttpClient,
-        private config: ConfigurationService) {
+        private config: ConfigurationService,
+        private logger: LoggerService) {
         
-            let currentUser: string = localStorage.getItem('currentUser') ?? '{}';
+            this.logger.debug('Initializing AuthService...');
+
+            let currentUserStr: string = localStorage.getItem('currentUser');
         
-            this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(currentUser));
+            let currentUser: User = {
+                id: 0,
+                username: "",
+                email: "",
+                token: null,
+                expiration: null
+            };
+
+            if (currentUserStr) {
+                currentUser = JSON.parse(currentUserStr);
+            }
+
+            this.currentUserSubject = new BehaviorSubject<User>(currentUser);
             this.currentUser = this.currentUserSubject.asObservable();
     }
 
@@ -46,21 +62,14 @@ export class AuthService {
     }
 
     public isLoggedIn(): Promise<boolean> {
-
-
-        //return Observable.of(new TestModel()).map(o => JSON.stringify(o));
-
-        //return false; //moment().isBefore(this.getExpiration());
-
         const promise = new Promise<boolean>((resolve, reject) => {
-            resolve(true);
+            if (this.currentUserValue.expiration != null) {
+                let isBefore: boolean = moment().isBefore(this.currentUserValue.expiration);
+                resolve(isBefore);
+            } else {
+                resolve(false);
+            }
         });
-          
         return promise;
     }
-
-    // isLoggedOut() {
-    //     return !this.isLoggedIn();
-    // }
-
 }

@@ -18,7 +18,7 @@ import {
 const featureModuleRoutes: Routes = [
   {
     path: 
-    '/dashboard',
+    'dashboard',
     canActivate: [AuthGuard],
     loadChildren: () => import('../components/dashboard/dashboard.component').then(m => m.DashboardComponent)
   },
@@ -63,13 +63,13 @@ const shellRoutes: Routes = [
     CommonModule,
     RouterModule.forChild(shellRoutes),
     //SharedModule,
-    MatSnackBar
+    //MatSnackBar
   ],
   exports: [
     RouterModule,
     ShellComponent,
     //SharedModule,
-    MatSnackBar,
+    //MatSnackBar,
   ]
 })
 export class ShellModule { }
