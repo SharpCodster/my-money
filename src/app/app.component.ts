@@ -27,17 +27,16 @@ export class AppComponent implements OnInit, OnDestroy {
     this.logger.info('AppComponent, checking authentication...');
 
     this.authService.isLoggedIn().then((isAuthenticated: boolean) => {
-      if (!isAuthenticated) {
-        if ('/login' !== window.location.pathname
-            && '/password-reset' !== window.location.pathname 
-            && '/confirm-email' !== window.location.pathname) {
-          this.write('redirect', window.location.pathname);
-          this.router.navigate(['/login']);
-        }
-      } else {
-        this.navigateToStoredEndpoint();
+
+      if (window.location.pathname !== '/login') {
+        this.write('redirect', window.location.pathname);
       }
 
+      if (isAuthenticated) {
+        this.navigateToStoredEndpoint();
+      } else {
+        this.router.navigate(['/login']);
+      }
     });
 
     this.notifier.unbusy();
@@ -65,12 +64,10 @@ export class AppComponent implements OnInit, OnDestroy {
     if (data) {
       return JSON.parse(data);
     }
-
     return;
   }
 
   private write(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
-
 }

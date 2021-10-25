@@ -1,4 +1,58 @@
-<p>shell works!</p>
+<div style="height: 100vh;">
 
-<router-outlet></router-outlet>
+    <mat-toolbar color="primary">
+
+        <span class="gap" [routerLink]="['/dashboard']">My Money</span>
+
+        <div fxShow="true" fxHide.lt-md="true">
+            <button mat-button>Budget</button>
+            <button mat-button>Transaction</button>
+            <button mat-button>Categories</button>
+            <button mat-button [routerLink]="['/accounts']">Accounts</button>
+        </div>
+        
+        <div fxShow="true" fxHide.gt-sm="true">
+            <button (click)="sidenav.toggle()" mat-icon-button color="accent" aria-label="Example icon-button with heart icon">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </div>
+
+        <span class="toolbar-spacer"></span>
+
+        <button mat-icon-button (click)="logout()" aria-label="Example icon-button with share icon">
+            <mat-icon>logout</mat-icon>
+        </button>
+
+    </mat-toolbar>
+
+    <mat-sidenav-container fxFlexFill class="example-container">
+        <mat-sidenav #sidenav fxLayout="column">
+          <div fxLayout="column">
+            <button mat-button (click)="sidenav.toggle()" >Close</button>
+            <button mat-button>Budget</button>
+            <button mat-button>Transaction</button>
+            <button mat-button>Categories</button>
+            <button mat-button>Accounts</button>
+          </div>
+        </mat-sidenav>
+
+        <mat-sidenav-content fxLayout="row" fxFlexFill fxLayoutGap="15px">
+          <router-outlet ></router-outlet>
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+
+</div>
+
+<div class="k-loading-panel" *ngIf="loading">
+  <div class="k-loading-panel-mask"></div>
+  <div class="k-loading-panel-wrapper">
+    <mat-progress-spinner  color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+</div>
+
+
+
+
 

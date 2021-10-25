@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 //import { NotificationService, Type } from '@progress/kendo-angular-notification';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { LoggerService } from '../../core/logger/log.service';
 import { NotifierService } from '../../core/notifier/notifier.service';
 import { NotificationEntry, NotificationEntryLevel } from '../../core/notifier/notifier';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   selector: 'app-shell',
@@ -26,12 +22,18 @@ export class ShellComponent implements OnInit {
   constructor(
     private logger: LoggerService,
     private notifier: NotifierService,
+    private authService: AuthService,
     //private notification: NotificationService,
-    private snackBar: MatSnackBar,
     private router: Router
   ) {
     this.logger.debug('AuthorizationGuard: ShellComponent ctor!!')
   }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
 
   ngOnInit(): void {
     this.notifier.busy();

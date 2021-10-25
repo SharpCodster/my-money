@@ -5,6 +5,7 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 //import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,12 +19,11 @@ import { ConfigurationService } from './core/configuration/configuration.service
 import { LoginPageComponent } from './components/login-page/login-page.component';
 
 import {  ErrorInterceptor } from './shared/interceptors/error.interceptor';
-import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 
 import { AuthService } from './core/auth/auth.service';
 
 import { ShellModule } from './shell/shell.module';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+
 
 export function onAppInit(
   logService: LoggerService,
@@ -73,12 +73,11 @@ const routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
     LoginPageComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    //AppRoutingModule,
+    FlexLayoutModule,
     RouterModule.forRoot(
       routes,
       {
@@ -99,11 +98,6 @@ const routes = [
       useFactory: onAppInit,
       deps: [LoggerService, ConfigurationService, HttpClient, AuthService],
       multi: true
-    },
-    { 
-      provide: HTTP_INTERCEPTORS, 
-      useClass: JwtInterceptor,
-      multi: true 
     },
     { 
       provide: HTTP_INTERCEPTORS, 

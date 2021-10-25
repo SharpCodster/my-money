@@ -3,41 +3,26 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../core/auth/auth-guard';
 import { ShellComponent } from '../shell/shell/shell.component';
-import {
-    MatSnackBar,
-    MatSnackBarHorizontalPosition,
-    MatSnackBarVerticalPosition,
-  } from '@angular/material/snack-bar';
 
+import { DashboardComponent } from '../components/dashboard/dashboard.component';
+import { AccountsListComponent } from '../components/account-list/account-list.component';
+import { AccountDetailsComponent } from '../components/account-details/account-details.component';
+
+import { MatButtonModule } from '@angular/material/button'
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
 // import { SharedModule } from '../shared/shared.module';
 // import { appRoutes } from '../core/models/app-routes';
 // import { NavMenuComponent } from './nav-menu/nav-menu.component';
 // import { WelcomeComponent } from '../shared/components/welcome/welcome.component';
 // import { ConfirmEmailComponent } from '../shared/components/confirm-email/confirm-email.component';
 
-const featureModuleRoutes: Routes = [
-  {
-    path: 
-    'dashboard',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('../components/dashboard/dashboard.component').then(m => m.DashboardComponent)
-  },
-//   {
-//     path: appRoutes.detractionFiles,
-//     canActivate: [AuthGuard],
-//     loadChildren: () => import('../features/detraction-files/detraction-files.module').then(m => m.DetractionFilesModule)
-//   },
-//   {
-//     path: appRoutes.settings,
-//     canActivate: [AuthGuard],
-//     loadChildren: () => import('../features/settings/settings.module').then(m => m.SettingsModule)
-//   },
-//   {
-//     path: appRoutes.estimate,
-//     canActivate: [AuthGuard],
-//     loadChildren: () => import('../features/estimate/estimate.module').then(m => m.EstimateModule)
-//   },
-];
 
 const shellRoutes: Routes = [
   {
@@ -46,9 +31,10 @@ const shellRoutes: Routes = [
     children: [
 
       { path: '', pathMatch: 'full', redirectTo: '/dashboard' },
-      //{ path: 'confirm-email', component: ConfirmEmailComponent },
-      //{ path: 'welcome', component: WelcomeComponent },
-      ...featureModuleRoutes
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+      { path: 'accounts', component: AccountsListComponent, canActivate: [AuthGuard] },
+      { path: 'accounts/:id', component: AccountDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'accounts/new', component: AccountDetailsComponent, canActivate: [AuthGuard] },
     ]
   }
 ];
@@ -57,13 +43,21 @@ const shellRoutes: Routes = [
   declarations: [
     //NavMenuComponent,
     ShellComponent,
-    
+    DashboardComponent,
+    AccountsListComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(shellRoutes),
-    //SharedModule,
-    //MatSnackBar
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    FlexLayoutModule
+    //SharedModule
   ],
   exports: [
     RouterModule,
