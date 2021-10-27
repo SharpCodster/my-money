@@ -1,1 +1,31 @@
 <p>account-details works!</p>
+
+
+
+<form class="example-container" [formGroup]="form" >
+
+	<mat-form-field class="example-full-width" appearance="fill">
+		<mat-label>Nome</mat-label>
+		<input matInput placeholder="Es. Contanti" value="" formControlName="name" [readonly]="isReadOnly">
+	  </mat-form-field>
+
+
+
+
+	<mat-form-field appearance="fill" color="accent">
+		<mat-label>Font size</mat-label>
+		<input matInput type="number" placeholder="Ex. 12" formControlName="fontSize" min="10">
+		<span matSuffix>px</span>
+		<mat-error *ngIf="false">Min size: 10px</mat-error>
+	</mat-form-field>
+	
+
+	<ngx-colors ngx-colors-trigger style="display: inline-block; margin:5px;"  formControlName="color" ></ngx-colors>
+	
+
+</form>
+
+
+
+
+
