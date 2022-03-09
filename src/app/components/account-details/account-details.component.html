@@ -1,31 +1,45 @@
-<p>account-details works!</p>
+<mat-card > 
+
+	<mat-card-title>{{title}}</mat-card-title>
+
+	<form fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" [formGroup]="form" >
+
+		<div fxFlex>
+			<ngx-colors ngx-colors-trigger style="display: inline-block; margin:5px;" formControlName="color"></ngx-colors>
+		</div>
+		
+
+		<mat-form-field fxFlex color="accent">
+			<mat-label>Nome</mat-label>
+			<input matInput placeholder="Es. Contanti" value="" formControlName="name" [readonly]="isReadOnly">
+			<mat-error *ngIf="form.controls.name.errors">{{getErrorMessage()}}</mat-error>
+		</mat-form-field>
 
 
+		<mat-form-field fxFlex color="accent">
+			<mat-label>Ordine</mat-label>
+			<input matInput type="number" placeholder="Ex. 2" formControlName="order" min="1" [readonly]="isReadOnly">
+			<mat-error *ngIf="form.controls.order.errors">{{getErrorMessage()}}</mat-error>
+		</mat-form-field>
 
-<form class="example-container" [formGroup]="form" >
+		<mat-slide-toggle fxFlex color="accent" formControlName="isActive" [disabled]="isReadOnly">Attivo</mat-slide-toggle>
 
-	<mat-form-field class="example-full-width" appearance="fill">
-		<mat-label>Nome</mat-label>
-		<input matInput placeholder="Es. Contanti" value="" formControlName="name" [readonly]="isReadOnly">
-	  </mat-form-field>
-
-
-
-
-	<mat-form-field appearance="fill" color="accent">
-		<mat-label>Font size</mat-label>
-		<input matInput type="number" placeholder="Ex. 12" formControlName="fontSize" min="10">
-		<span matSuffix>px</span>
-		<mat-error *ngIf="false">Min size: 10px</mat-error>
-	</mat-form-field>
-	
-
-	<ngx-colors ngx-colors-trigger style="display: inline-block; margin:5px;"  formControlName="color" ></ngx-colors>
-	
-
-</form>
+		<mat-form-field fxFlex color="accent">
+			<mat-label>Icona</mat-label>
+			<input matInput placeholder="Es. bank" value="" formControlName="icon" [readonly]="isReadOnly">
+			<mat-error *ngIf="form.controls.icon.errors">{{getErrorMessage()}}</mat-error>
+		</mat-form-field>
 
 
+	</form>
 
+	<mat-divider></mat-divider>
 
+	<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutAlign="end">
+		
+		<button mat-raised-button color="primary" *ngIf="isReadOnly" (click)="edit()">Edit</button>
+		<button mat-raised-button color="warn" *ngIf="!isReadOnly" (click)="save()">Save</button>
+		<button mat-raised-button *ngIf="!isReadOnly" (click)="cancel()">Cancel</button>
+	</div>
 
+</mat-card>

@@ -20,7 +20,7 @@ export abstract class BaseDetailsComponent<TModel extends BaseId> implements OnI
     protected refreshValidation: boolean = false;
     protected isBusy: boolean = true;
 
-    protected title: string = "";
+    public title: string = "";
 
     protected createdWithSuccessMessage: string = "a";
     protected updatedWithSuccessMessage: string = "b";
@@ -200,14 +200,13 @@ export abstract class BaseDetailsComponent<TModel extends BaseId> implements OnI
         const successMessage = this.createdWithSuccessMessage ? this.createdWithSuccessMessage : `${this.desc} creato con successo.`;
         this.notifier.success(successMessage);
         this.form.markAsPristine();
-
+        //this.isReadOnly = true;
         this.navigateToDetail(newId);
     }
 
     private handleUpdatedWithSuccess(data: TModel): void {
         const successMessage = this.updatedWithSuccessMessage ? this.createdWithSuccessMessage : `${this.desc} aggiornato con successo.`;
         this.notifier.success(successMessage);
-
         this.isReadOnly = true;
         this.dataToForm(data);
     }

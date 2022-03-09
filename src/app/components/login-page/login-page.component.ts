@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
@@ -11,6 +11,8 @@ import { AuthService } from '../../core/auth/auth.service';
 export class LoginPageComponent implements OnInit {
 
   form: FormGroup;
+
+  @Input() error: string | null;
 
   constructor(private fb:FormBuilder, 
     private authService: AuthService, 
@@ -35,6 +37,9 @@ export class LoginPageComponent implements OnInit {
                 () => {
                     console.log("User is logged in");
                     this.router.navigateByUrl('/');
+                },
+                (error: any) => {
+                  console.log(error);
                 }
             );
     }

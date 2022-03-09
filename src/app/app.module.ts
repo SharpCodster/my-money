@@ -24,6 +24,10 @@ import { AuthService } from './core/auth/auth.service';
 
 import { ShellModule } from './shell/shell.module';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button'
 
 export function onAppInit(
   logService: LoggerService,
@@ -89,7 +93,11 @@ const routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [
     DatePipe,

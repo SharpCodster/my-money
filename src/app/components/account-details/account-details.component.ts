@@ -66,4 +66,11 @@ order: number,
     }
     
 
+    getErrorMessage() {
+      if (this.form.controls.name.hasError('required')) {
+        return 'You must enter a value';
+      }
+  
+      return "error";//this.form.controls.hasError('email') ? 'Not a valid email' : '';
+    }
 }

@@ -16,7 +16,7 @@ export class AccountsListComponent implements OnInit, AfterViewInit {
     private acountService: AccountService,
     private router: Router) { }
 
-  displayedColumns: string[] = ['id', 'name', 'type', 'isActive'];
+  displayedColumns: string[] = ['order', 'name', 'type', 'isActive'];
 
   dataSource = new MatTableDataSource<Account>();
 
