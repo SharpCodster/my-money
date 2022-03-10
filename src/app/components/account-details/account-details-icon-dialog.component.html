@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Selezionare l'icona</h1>
+<div mat-dialog-content>
+
+    <mat-grid-list cols="4" rowHeight="2:1">
+        <mat-grid-tile *ngFor="let matIcon of material_icons">
+            <button mat-flat-button (click)="selected(matIcon)">
+                <mat-icon aria-hidden="false" aria-label="Example home icon"> {{matIcon}} </mat-icon>
+            </button>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>
+
+

@@ -1,49 +1,127 @@
-<div style="height: 100vh;">
+<mat-toolbar color="primary">
 
-    <mat-toolbar color="primary">
+  <mat-toolbar-row>
 
-        <span class="gap" [routerLink]="['/dashboard']">My Money</span>
+    <ng-container>
+      <button mat-icon-button (click)="navigationSidenav.toggle()">
+        <mat-icon > menu </mat-icon>
+      </button>
+    </ng-container>
 
-        <div fxShow="true" fxHide.lt-md="true">
-            <button mat-button>Budget</button>
-            <button mat-button>Transaction</button>
-            <button mat-button>Categories</button>
-            <button mat-button [routerLink]="['/accounts']">Accounts</button>
-        </div>
-        
-        <div fxShow="true" fxHide.gt-sm="true">
-            <button (click)="sidenav.toggle()" mat-icon-button color="accent" aria-label="Example icon-button with heart icon">
-                <mat-icon>menu</mat-icon>
-            </button>
-        </div>
+    <span class="navigation-bar-title">
+      MyMoney
+    </span>
 
-        <span class="toolbar-spacer"></span>
+    <span class="navigation-bar-spacer"></span>
 
-        <button mat-icon-button (click)="logout()" aria-label="Example icon-button with share icon">
-            <mat-icon>logout</mat-icon>
+    <ng-container>
+
+      <button mat-icon-button>
+        <mat-icon> settings </mat-icon>
+      </button>
+
+      <button mat-icon-button >
+        <mat-icon > help </mat-icon>
+      </button>
+
+    </ng-container>
+
+    <ul class="navigation-items">
+
+      <li>
+
+        <button mat-icon-button [matMenuTriggerFor]="auth">
+          <mat-icon> person</mat-icon>
         </button>
 
-    </mat-toolbar>
+        <mat-menu #auth="matMenu">
 
-    <mat-sidenav-container fxFlexFill class="example-container">
-        <mat-sidenav #sidenav fxLayout="column">
-          <div fxLayout="column">
-            <button mat-button (click)="sidenav.toggle()" >Close</button>
-            <button mat-button>Budget</button>
-            <button mat-button>Transaction</button>
-            <button mat-button>Categories</button>
-            <button mat-button [routerLink]="['/accounts']">Accounts</button>
-          </div>
-        </mat-sidenav>
+          <ng-container >
+
+            <button mat-menu-item (click)="logout()">
+              <mat-icon > logout </mat-icon>
+              <span>
+                Logout
+              </span>
+            </button>
+
+          </ng-container>
+
+        </mat-menu>
+
+      </li>
+
+    </ul>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>
 
 
-          <mat-sidenav-content div class="container" >
-            <router-outlet ></router-outlet>
-          </mat-sidenav-content>
-        
-    </mat-sidenav-container>
+<mat-sidenav-container autosize>
 
-</div>
+  <mat-sidenav #navigationSidenav mode="over" role="navigation">
+
+    <mat-nav-list>
+
+      <ng-container >
+
+        <h2 matSubheader>
+            Start
+        </h2>
+
+        <!-- Hides the auto highlighting of the first item in the nav list -->
+        <a mat-list-item routerLink="/" style="height: 0;"></a>
+        <a 
+           mat-list-item
+           (click)="navigationSidenav.close()"
+           [routerLink]="['/']"
+           routerLinkActive="list-item-active">
+           <mat-icon  class="nav-list-icon"> home </mat-icon>
+           Dashboard
+        </a>
+
+      </ng-container>
+
+      <ng-container >
+
+        <h2 matSubheader>
+          Dettagli
+        </h2>
+
+        <!-- Hides the auto highlighting of the first item in the nav list -->
+        <a mat-list-item routerLink="/" style="height: 0;"></a>
+
+        <a
+          mat-list-item
+          (click)="navigationSidenav.close()"
+          [routerLink]="['/accounts']"
+          routerLinkActive="list-item-active">
+          <mat-icon class="nav-list-icon"> account_balance </mat-icon>
+          Accounts
+        </a>
+
+
+      </ng-container>
+
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content role="main">
+
+
+    <router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+
+
+
+</mat-sidenav-container>
+
+
+
 
 <div class="k-loading-panel" *ngIf="loading">
   <div class="k-loading-panel-mask"></div>

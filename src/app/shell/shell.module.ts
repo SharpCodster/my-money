@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from '../components/dashboard/dashboard.component';
 import { AccountsListComponent } from '../components/account-list/account-list.component';
 import { AccountDetailsComponent } from '../components/account-details/account-details.component';
+import { AccountDetailsIconDialog } from '../components/account-details/account-details-icon-dialog.component';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -77,7 +78,8 @@ const shellRoutes: Routes = [
     ShellComponent,
     DashboardComponent,
     AccountsListComponent,
-    AccountDetailsComponent
+    AccountDetailsComponent,
+    AccountDetailsIconDialog
   ],
   imports: [
     CommonModule,

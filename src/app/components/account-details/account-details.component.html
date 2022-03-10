@@ -31,6 +31,13 @@
 		</mat-form-field>
 
 
+		<div class="example-button-container">
+			<button mat-fab color="accent" (click)="openDialog()" aria-label="Example icon button with a bookmark icon">
+			  <mat-icon formControlName="icon">{{form.controls["icon"].value}}</mat-icon>
+			</button>
+		</div>
+
+
 	</form>
 
 	<mat-divider></mat-divider>

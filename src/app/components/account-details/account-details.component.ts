@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit,OnDestroy, Inject } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { BaseApi } from '../../api/base-api';
@@ -9,6 +9,8 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { BaseDetailsComponent } from '../../shared/components/base-detail.component';
 import { AccountService } from 'src/app/api/my-money/account.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { AccountDetailsIconDialog } from './account-details-icon-dialog.component';
 
 @Component({
   selector: 'app-account-details',
@@ -23,13 +25,24 @@ export class AccountDetailsComponent extends BaseDetailsComponent<Account> {
     protected route: ActivatedRoute,
     private router: Router,
     protected logger: LoggerService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public dialog: MatDialog
     ) { 
       super("Account", notifier, service, route, logger);
 
     }
 
+    openDialog(): void {
+
+      const dialogRef = this.dialog.open(AccountDetailsIconDialog, {
+        width: '250px'
+      });
   
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.form.controls["icon"].setValue(result);
+      });
+    }
     protected createForm(): FormGroup {
       
 /*
@@ -58,9 +71,11 @@ order: number,
     protected getModelName(model: Account): string {
       return "cacca";
     }
+
     protected navigateToDetail(id: number): void {
       this.router.navigate(['accounts', id ]);
     }
+
     protected navigateToList(): void {
       this.router.navigate(['accounts']);
     }
@@ -74,3 +89,5 @@ order: number,
       return "error";//this.form.controls.hasError('email') ? 'Not a valid email' : '';
     }
 }
+
+

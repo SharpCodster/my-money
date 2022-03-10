@@ -16,7 +16,7 @@ export class AccountsListComponent implements OnInit, AfterViewInit {
     private acountService: AccountService,
     private router: Router) { }
 
-  displayedColumns: string[] = ['order', 'name', 'type', 'isActive'];
+  displayedColumns: string[] = ['order', 'icon', 'name', 'type', 'isActive'];
 
   dataSource = new MatTableDataSource<Account>();
 
@@ -40,4 +40,8 @@ export class AccountsListComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/accounts', row.id]);
   }
 
+  create(): void {
+    console.log("new");
+    this.router.navigate(['/accounts/new']);
+  }
 }
