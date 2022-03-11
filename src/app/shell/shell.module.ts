@@ -5,6 +5,7 @@ import { AuthGuard } from '../core/auth/auth-guard';
 import { ShellComponent } from '../shell/shell/shell.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { NavigationToolbarComponent } from './nav-toolbar/nav-toolbar.component';
 import { DashboardComponent } from '../components/dashboard/dashboard.component';
 import { AccountsListComponent } from '../components/account-list/account-list.component';
 import { AccountDetailsComponent } from '../components/account-details/account-details.component';
@@ -76,6 +77,7 @@ const shellRoutes: Routes = [
     //NavMenuComponent,
     //ColorDirective,
     ShellComponent,
+    NavigationToolbarComponent,
     DashboardComponent,
     AccountsListComponent,
     AccountDetailsComponent,

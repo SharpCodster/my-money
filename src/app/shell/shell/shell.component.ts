@@ -23,7 +23,6 @@ export class ShellComponent implements OnInit {
     private logger: LoggerService,
     private notifier: NotifierService,
     private authService: AuthService,
-    //private notification: NotificationService,
     private router: Router
   ) {
     this.logger.debug('AuthorizationGuard: ShellComponent ctor!!')
@@ -75,7 +74,7 @@ export class ShellComponent implements OnInit {
     this.notifier
       .notification$
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(_ => this.handleNotificationEntry(_));
+      .subscribe((_: NotificationEntry) => this.handleNotificationEntry(_));
   }
 
   private handleNotificationEntry(entry: NotificationEntry): void {

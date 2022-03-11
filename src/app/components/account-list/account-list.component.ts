@@ -28,7 +28,7 @@ export class AccountsListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.acountService.findAll$().subscribe(
-      result => {
+      (result: any) => {
         this.dataSource = new MatTableDataSource<Account>(result);
       }
     );
