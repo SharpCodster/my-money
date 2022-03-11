@@ -8,14 +8,7 @@
 </mat-toolbar>
 
 
-<ng-container class="contentCard">
-
-  <mat-card class="titleCard">
-    <h3>Accounts</h3>
-  </mat-card>
-
-
-  <mat-card  class="contentCard">
+  <div class="table-container">
     <table mat-table [dataSource]="dataSource">
 
       <ng-container matColumnDef="order">
@@ -44,7 +37,7 @@
       </ng-container>
 
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row 
         *matRowDef="let row; columns: displayedColumns;"
         (click)="goToDetails(row)">
@@ -52,10 +45,11 @@
     </table>
 
     <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-      showFirstLastButtons 
-      aria-label="Select page of periodic elements"
-      >
-    </mat-paginator>
-  </mat-card>
+    [length]="resultsLength"
+    showFirstLastButtons 
+    aria-label="Select page of periodic elements"
+    >
+  </mat-paginator>
+    
+</div>
 
-</ng-container>

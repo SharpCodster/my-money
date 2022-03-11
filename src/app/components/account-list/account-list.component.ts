@@ -20,6 +20,10 @@ export class AccountsListComponent implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource<Account>();
 
+  resultsLength = 0;
+  isLoadingResults = true;
+  isRateLimitReached = false;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
