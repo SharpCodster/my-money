@@ -1,5 +1,3 @@
-@use '../../StyleUtils/mat-variables.scss' as matVar;
-@use '../../StyleUtils/variables.scss' as myVar;
 @use '../../../styles.scss' as styles;
 
 .table-container {
@@ -33,31 +31,30 @@ table {
 
 .command-bar {
 
-  height: myVar.$command-bar-height-desktop !important;
-  min-height: myVar.$command-bar-height-desktop !important;
+  height: styles.$command-bar-height-desktop !important;
+  min-height: styles.$command-bar-height-desktop !important;
 
-  @media (matVar.$mat-xsmall) {
-    height: myVar.$command-bar-height-mobile !important;
-    min-height: myVar.$command-bar-height-mobile !important;
+  @media (styles.$mat-xsmall) {
+    height: styles.$command-bar-height-mobile !important;
+    min-height: styles.$command-bar-height-mobile !important;
   }
 
 }
 
 
-
 .command-bar-row {
 
-  height: myVar.$command-bar-height-desktop !important;
-  min-height: myVar.$command-bar-height-desktop !important;
+  height: styles.$command-bar-height-desktop !important;
+  min-height: styles.$command-bar-height-desktop !important;
 
-  padding-left: myVar.$command-bar-row-padding;
-  padding-right: myVar.$command-bar-row-padding;
+  padding-left: styles.$command-bar-row-padding;
+  padding-right: styles.$command-bar-row-padding;
 
   background: rgba(0, 0, 0, 0.04);
 
-  @media (matVar.$mat-xsmall) {
-    height: myVar.$command-bar-height-mobile !important;
-    min-height: myVar.$command-bar-height-mobile !important;
+  @media (styles.$mat-xsmall) {
+    height: styles.$command-bar-height-mobile !important;
+    min-height: styles.$command-bar-height-mobile !important;
   }
 
 }
