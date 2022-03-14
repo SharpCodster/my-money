@@ -31,7 +31,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/app/styleUtils/mat-variables.scss",
+              "src/app/styleUtils/variables.scss"
             ],
             "scripts": []
           },
