@@ -1,7 +1,6 @@
 @use '../../StyleUtils/mat-variables.scss' as matVar;
 @use '../../StyleUtils/variables.scss' as myVar;
-
-
+@use '../../../styles.scss' as styles;
 
 .table-container {
   position: relative;

@@ -2,6 +2,8 @@
 
 @use '@angular/material' as mat;
 @use './app/shell/shell/shell.component-theme.scss' as shell;
+@use './app/styleUtils/mat-variables.scss' as matVars;
+@use './app/styleUtils/variables.scss'  as myVars;
 
 @include mat.core();
 
