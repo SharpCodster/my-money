@@ -8,3 +8,37 @@ $nav-list-icon-padding: 12px !default;
   height: 100%;
 }
 
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+.k-loading-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+.k-loading-panel-mask {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+  opacity: 0.8;
+}
+.k-loading-panel-wrapper {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}

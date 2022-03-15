@@ -1,79 +1,55 @@
-<nav-toolbar (toggleSidenav)="navigationSidenav.toggle()" ></nav-toolbar>
+<div class="container">
 
-<mat-sidenav-container class="sidenavNavigation">
+  <nav-toolbar (toggleSidenav)="navigationSidenav.toggle()" ></nav-toolbar>
 
-  <mat-sidenav #navigationSidenav mode="over" role="navigation">
+  
+  <mat-sidenav-container class="sidenavNavigation">
+    <mat-sidenav #navigationSidenav mode="over" role="navigation" fixedInViewport >
+      <mat-nav-list>
+        <ng-container  >
+          <h2 matSubheader>Start</h2>
+           <!-- Hides the auto highlighting of the first item in the nav list -->
+          <a mat-list-item routerLink="/" style="height: 0;"></a>
+          <a 
+            mat-list-item
+            (click)="navigationSidenav.close()"
+            [routerLink]="['/dashboard']"
+            routerLinkActive="list-item-active">
+              <mat-icon  class="nav-list-icon"> home </mat-icon>
+            Dashboard
+          </a>
+        </ng-container>
 
-    <mat-nav-list>
+        <ng-container >
+          <h2 matSubheader>Dettagli</h2>
+           <!-- Hides the auto highlighting of the first item in the nav list -->
+          <a mat-list-item routerLink="/" style="height: 0;"></a>
+          <a
+            mat-list-item
+            (click)="navigationSidenav.close()"
+            [routerLink]="['/accounts']"
+            routerLinkActive="list-item-active">
+              <mat-icon class="nav-list-icon"> account_balance </mat-icon>
+            Accounts
+          </a>
+        </ng-container>
+      </mat-nav-list>
+    </mat-sidenav>
 
-      <ng-container  >
+    <mat-sidenav-content role="main">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 
-        <h2 matSubheader>
-            Start
-        </h2>
-
-        <!-- Hides the auto highlighting of the first item in the nav list -->
-        <a mat-list-item routerLink="/" style="height: 0;"></a>
-        <a 
-           mat-list-item
-           (click)="navigationSidenav.close()"
-           [routerLink]="['/']"
-           routerLinkActive="list-item-active">
-           <mat-icon  class="nav-list-icon"> home </mat-icon>
-           Dashboard
-        </a>
-
-      </ng-container>
-
-      <ng-container >
-
-        <h2 matSubheader>
-          Dettagli
-        </h2>
-
-        <!-- Hides the auto highlighting of the first item in the nav list -->
-        <a mat-list-item routerLink="/" style="height: 0;"></a>
-
-        <a
-          mat-list-item
-          (click)="navigationSidenav.close()"
-          [routerLink]="['/accounts']"
-          routerLinkActive="list-item-active">
-          <mat-icon class="nav-list-icon"> account_balance </mat-icon>
-          Accounts
-        </a>
-
-
-      </ng-container>
-
-
-    </mat-nav-list>
-
-  </mat-sidenav>
-
-  <mat-sidenav-content role="main">
-
-
-    <router-outlet></router-outlet>
-
-  </mat-sidenav-content>
-
-
-
-</mat-sidenav-container>
-
-
-
-
-<div class="k-loading-panel" *ngIf="loading">
-  <div class="k-loading-panel-mask"></div>
-  <div class="k-loading-panel-wrapper">
-    <mat-progress-spinner  color="primary" mode="indeterminate">
-    </mat-progress-spinner>
+  <div class="k-loading-panel" *ngIf="loading">
+    <div class="k-loading-panel-mask"></div>
+    <div class="k-loading-panel-wrapper">
+      <mat-progress-spinner  color="primary" mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
   </div>
+
+
 </div>
-
-
-
 
 

@@ -4,15 +4,15 @@
 
 $toolbar-title-padding: 16px !default;
 
-.navigation-bar-title {
+.mytoolbar-bar-title {
   margin: 0 $toolbar-title-padding 0 $toolbar-title-padding;
 }
 
-.navigation-bar-spacer {
+.mytoolbar-bar-spacer {
   flex: 1 1 auto;
 }
 
-.navigation-items {
+.mytoolbar-items {
   cursor: pointer;
   list-style: none;
   margin: 0;
