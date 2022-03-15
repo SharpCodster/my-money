@@ -5,6 +5,8 @@ import { AuthGuard } from '../core/auth/auth-guard';
 import { ShellComponent } from '../shell/shell/shell.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { SiNoPipe } from '../shared/pipes/si-no';
+
 import { NavigationToolbarComponent } from './nav-toolbar/nav-toolbar.component';
 import { DashboardComponent } from '../components/dashboard/dashboard.component';
 import { AccountsListComponent } from '../components/account-list/account-list.component';
@@ -76,6 +78,7 @@ const shellRoutes: Routes = [
   declarations: [
     //NavMenuComponent,
     //ColorDirective,
+    SiNoPipe,
     ShellComponent,
     NavigationToolbarComponent,
     DashboardComponent,
