@@ -6,6 +6,7 @@ import { ShellComponent } from '../shell/shell/shell.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SiNoPipe } from '../shared/pipes/si-no';
+import { AccountTypePipe } from '../shared/pipes/account-type.pipe';
 
 import { NavigationToolbarComponent } from './nav-toolbar/nav-toolbar.component';
 import { DashboardComponent } from '../components/dashboard/dashboard.component';
@@ -79,6 +80,7 @@ const shellRoutes: Routes = [
     //NavMenuComponent,
     //ColorDirective,
     SiNoPipe,
+    AccountTypePipe,
     ShellComponent,
     NavigationToolbarComponent,
     DashboardComponent,

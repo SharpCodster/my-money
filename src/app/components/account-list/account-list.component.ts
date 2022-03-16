@@ -1,5 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
+import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AccountService } from '../../api/my-money/account.service';
@@ -10,7 +9,7 @@ import { Account } from '../../core/models/account';
   templateUrl: './account-list.component.html',
   styleUrls: ['./account-list.component.scss']
 })
-export class AccountsListComponent implements OnInit, AfterViewInit {
+export class AccountsListComponent implements OnInit {
 
   constructor(
     private acountService: AccountService,
@@ -20,23 +19,12 @@ export class AccountsListComponent implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource<Account>();
 
-  resultsLength = 0;
-  isLoadingResults = true;
-  isRateLimitReached = false;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-
   ngOnInit(): void {
     this.acountService.findAll$().subscribe(
-      (result: any) => {
+      (result: Account[]) => {
         this.dataSource = new MatTableDataSource<Account>(result);
       }
     );
-
   }
 
   goToDetails(row: Account): void {

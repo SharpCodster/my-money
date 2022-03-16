@@ -36,6 +36,30 @@
             "scripts": []
           },
           "configurations": {
+            "dev": {
+              "fileReplacements": [
+
+              ],
+              "optimization": true,
+              "outputHashing": "none",
+              "sourceMap": true,
+              "namedChunks": true,
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -73,7 +97,10 @@
           "configurations": {
             "production": {
               "browserTarget": "MyMoney:build:production"
-            }
+            },
+            "development": {
+              "browserTarget": "MyMoney:build:dev"
+           }
           }
         },
         "extract-i18n": {

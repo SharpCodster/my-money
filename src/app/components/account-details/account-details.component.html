@@ -1,3 +1,39 @@
+<div>
+	<mat-toolbar class="command-bar">
+		<mat-toolbar-row class="command-bar-row">
+			<button mat-button (click)="back()" [disabled]="!isReadOnly" >
+				<mat-icon>arrow_back</mat-icon>
+				<span>BACK</span>
+			</button>
+			<button mat-button (click)="edit()" [disabled]="!isReadOnly" >
+				<mat-icon>edit</mat-icon>
+				<span>EDIT</span>
+			</button>
+			<button mat-button (click)="save()" [disabled]="isReadOnly" >
+				<mat-icon>save</mat-icon>
+				<span>SAVE</span>
+			</button>
+			<button mat-button (click)="cancel()" [disabled]="isReadOnly">
+				<mat-icon>close</mat-icon>
+				<span>CANCEL</span>
+			</button>
+		</mat-toolbar-row>
+	</mat-toolbar>
+</div>
+
+<div class="content-container">
+
+	<h2>Account Details</h2>
+
+</div>
+
+
+
+
+
+
+
+
 <mat-card > 
 
 	<mat-card-title>{{title}}</mat-card-title>
