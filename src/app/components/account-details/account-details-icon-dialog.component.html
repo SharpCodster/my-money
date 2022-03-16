@@ -1,10 +1,18 @@
-<h1 mat-dialog-title>Selezionare l'icona</h1>
+
+
+
+<h1 mat-dialog-title>Selezionare</h1>
 <div mat-dialog-content>
+
+    
+    <ngx-colors ngx-colors-trigger style="display: inline-block; margin:5px;" [(ngModel)]="data.color"></ngx-colors>
+    
+        
 
     <mat-grid-list cols="4" rowHeight="2:1">
         <mat-grid-tile *ngFor="let matIcon of material_icons">
             <button mat-flat-button (click)="selected(matIcon)">
-                <mat-icon aria-hidden="false" aria-label="Example home icon"> {{matIcon}} </mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" [ngStyle]="{'color': data.color }"> {{matIcon}} </mat-icon>
             </button>
         </mat-grid-tile>
     </mat-grid-list>
@@ -13,6 +21,7 @@
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="save()">Save</button>
 </div>
 
 

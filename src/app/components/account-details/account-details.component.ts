@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
 import { BaseDetailsComponent } from '../../shared/components/base-detail.component';
 import { AccountService } from 'src/app/api/my-money/account.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { AccountDetailsIconDialog } from './account-details-icon-dialog.component';
+import { AccountDetailsIconDialog, IconAndColorDialog } from './account-details-icon-dialog.component';
 
 @Component({
   selector: 'app-account-details',
@@ -35,25 +35,23 @@ export class AccountDetailsComponent extends BaseDetailsComponent<Account> {
     openDialog(): void {
 
       const dialogRef = this.dialog.open(AccountDetailsIconDialog, {
-        width: '250px'
+        width: '250px',
+        data: {
+          icon: this.form.controls["icon"].value,
+          color: this.form.controls['color'].value
+        }
       });
   
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe((result: IconAndColorDialog) => {
         console.log('The dialog was closed');
-        this.form.controls["icon"].setValue(result);
+        if (result) {
+          this.form.controls["icon"].setValue(result.icon);
+          this.form.controls["color"].setValue(result.color);
+        }
       });
     }
-    protected createForm(): FormGroup {
-      
-/*
-order: number,
-    name: string,
-    isActive: boolean,
-    icon: string,
-    color: string,
-    type: AccountType
-*/
 
+    protected createForm(): FormGroup {  
       const form = new FormGroup({
         order: new FormControl(0),
         name: new FormControl("", [Validators.required]),
@@ -69,7 +67,7 @@ order: number,
     }
 
     protected getModelName(model: Account): string {
-      return "cacca";
+      return this.form.controls.name.value;
     }
 
     protected navigateToDetail(id: number): void {

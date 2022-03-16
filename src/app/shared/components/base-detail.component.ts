@@ -142,7 +142,7 @@ export abstract class BaseDetailsComponent<TModel extends BaseId> implements OnI
     }
 
     protected refreshTitle() {
-        //this.title = this.isNew ? `New ${this.desc}` : `${this.desc}: ${this.getModelName(this.data)}`;
+        this.title = this.isNew ? `New ${this.desc}` : `${this.desc}: ${this.getModelName(this.data)}`;
     }
 
     protected enableValidationRefresh(form: FormGroup) {

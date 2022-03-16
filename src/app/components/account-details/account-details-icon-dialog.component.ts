@@ -1,5 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+export interface IconAndColorDialog {
+  icon: string,
+  color: string
+}
 
 @Component({
     selector: 'account-details-icon-dialog',
@@ -39,17 +44,25 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
     'local_offer',
     'lunch_dining'];
 
+    data: IconAndColorDialog;
 
     constructor(
-      public dialogRef: MatDialogRef<AccountDetailsIconDialog>
-    ) {}
+      public dialogRef: MatDialogRef<AccountDetailsIconDialog>,
+      @Inject(MAT_DIALOG_DATA) data: IconAndColorDialog
+    ) {
+      this.data = data;
+    }
   
     onNoClick(): void {
       this.dialogRef.close();
     }
 
     selected(matIcon: string): void {
-        this.dialogRef.close(matIcon);
+      this.data.icon = matIcon;
+    }
+
+    save(): void {
+      this.dialogRef.close(this.data);
     }
 
   }
