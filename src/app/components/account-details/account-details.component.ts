@@ -9,8 +9,9 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { BaseDetailsComponent } from '../../shared/components/base-detail.component';
 import { AccountService } from 'src/app/api/my-money/account.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AccountDetailsIconDialog, IconAndColorDialog } from './account-details-icon-dialog.component';
+import { AccountType, AccountTypeLabelMapping } from '../../core/models/account-type';
 
 @Component({
   selector: 'app-account-details',
@@ -18,6 +19,8 @@ import { AccountDetailsIconDialog, IconAndColorDialog } from './account-details-
   styleUrls: ['./account-details.component.scss']
 })
 export class AccountDetailsComponent extends BaseDetailsComponent<Account> {
+
+  tipi: Record<AccountType, string> = AccountTypeLabelMapping
 
   constructor(
     protected notifier: NotifierService,
@@ -29,7 +32,8 @@ export class AccountDetailsComponent extends BaseDetailsComponent<Account> {
     public dialog: MatDialog
     ) { 
       super("Account", notifier, service, route, logger);
-
+      
+      
     }
 
     openDialog(): void {
@@ -51,7 +55,10 @@ export class AccountDetailsComponent extends BaseDetailsComponent<Account> {
       });
     }
 
-    protected createForm(): FormGroup {  
+    protected createForm(): FormGroup { 
+
+      let fileTypes = Object.values(AccountType);
+
       const form = new FormGroup({
         order: new FormControl(0),
         name: new FormControl("", [Validators.required]),
@@ -59,6 +66,7 @@ export class AccountDetailsComponent extends BaseDetailsComponent<Account> {
         icon: new FormControl("bank"),
         color: new FormControl('#c32af3'),
         type: new FormControl(1),
+        accountType: new FormControl(AccountType.Bank)
       });
 
       this.enableValidationRefresh(form);
