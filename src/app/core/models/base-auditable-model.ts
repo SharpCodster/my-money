@@ -1,6 +1,6 @@
 import { BaseId } from "./base-id";
 
-export interface BaseModel extends BaseId {
+export interface BaseAuditableModel extends BaseId {
     createdAtUtc: Date;
     createdBy: string;
     updatedAtUtc: Date;

@@ -15,14 +15,14 @@ export class AccountsListComponent implements OnInit {
     private acountService: AccountService,
     private router: Router) { }
 
-  displayedColumns: string[] = ['order', 'icon', 'name', 'type', 'isActive'];
+  displayedColumns: string[] = ['order', 'icon', 'name', 'isActive'];
 
   dataSource = new MatTableDataSource<Account>();
 
   ngOnInit(): void {
     this.acountService.findAll$().subscribe(
-      (result: Account[]) => {
-        this.dataSource = new MatTableDataSource<Account>(result);
+      (result: any) => {
+        this.dataSource = new MatTableDataSource<Account>(result.data);
       }
     );
   }

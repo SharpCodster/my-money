@@ -25,7 +25,7 @@ export class BaseApi<TModel> {
     return this.apiService.get$(url + '/queue?' + this.toDataSourceRequestString(gridState));
   }
 
-  findById$(id: number): Observable<TModel> {
+  findById$(id: string): Observable<TModel> {
     const url = this.relativeApiUrl(id);
     return this.apiService.get$(url);
   }
@@ -35,12 +35,12 @@ export class BaseApi<TModel> {
     return this.apiService.post$<TModel>(url, item);
   }
 
-  update$(id: number, item: TModel): Observable<TModel> {
+  update$(id: string, item: TModel): Observable<TModel> {
     const url = this.relativeApiUrl(id);
     return this.apiService.put$<TModel>(url, item);
   }
 
-  delete$(id: number): Observable<Object> {
+  delete$(id: string): Observable<Object> {
     const url = this.relativeApiUrl(id);
     return this.apiService.delete$(url);
   }

@@ -6,7 +6,7 @@
   <mat-sidenav-container class="sidenavNavigation">
     <mat-sidenav #navigationSidenav mode="over" role="navigation" fixedInViewport >
       <mat-nav-list>
-        <ng-container  >
+        <ng-container>
           <h2 matSubheader>Start</h2>
            <!-- Hides the auto highlighting of the first item in the nav list -->
           <a mat-list-item routerLink="/" style="height: 0;"></a>
@@ -20,7 +20,7 @@
           </a>
         </ng-container>
 
-        <ng-container >
+        <ng-container>
           <h2 matSubheader>Dettagli</h2>
            <!-- Hides the auto highlighting of the first item in the nav list -->
           <a mat-list-item routerLink="/" style="height: 0;"></a>
@@ -31,6 +31,46 @@
             routerLinkActive="list-item-active">
               <mat-icon class="nav-list-icon"> account_balance </mat-icon>
             Accounts
+          </a>
+          <a
+            mat-list-item
+            (click)="navigationSidenav.close()"
+            [routerLink]="['/categories']"
+            routerLinkActive="list-item-active">
+              <mat-icon class="nav-list-icon"> account_balance </mat-icon>
+            Categories
+          </a>
+          <a
+            mat-list-item
+            (click)="navigationSidenav.close()"
+            [routerLink]="['/categorygroups']"
+            routerLinkActive="list-item-active">
+              <mat-icon class="nav-list-icon"> account_balance </mat-icon>
+            Category groups
+          </a>
+          <a
+            mat-list-item
+            (click)="navigationSidenav.close()"
+            [routerLink]="['/tags']"
+            routerLinkActive="list-item-active">
+              <mat-icon class="nav-list-icon"> account_balance </mat-icon>
+            Tags
+          </a>
+          <a
+            mat-list-item
+            (click)="navigationSidenav.close()"
+            [routerLink]="['/payees']"
+            routerLinkActive="list-item-active">
+              <mat-icon class="nav-list-icon"> account_balance </mat-icon>
+            Payees
+          </a>
+          <a
+            mat-list-item
+            (click)="navigationSidenav.close()"
+            [routerLink]="['/transactions']"
+            routerLinkActive="list-item-active">
+              <mat-icon class="nav-list-icon"> account_balance </mat-icon>
+            Transactions
           </a>
         </ng-container>
       </mat-nav-list>

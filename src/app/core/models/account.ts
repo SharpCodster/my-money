@@ -1,11 +1,11 @@
-import { BaseModel } from './base-model';
-import { AccountType } from './account-type';
+import { BaseAuditableModel } from './base-auditable-model';
 
-export interface Account extends BaseModel {
+export interface Account extends BaseAuditableModel {
     order: number,
     name: string,
     isActive: boolean,
     icon: string,
     color: string,
-    type: AccountType
+    accountBalance: number,
+    avaiableBalance: number
 }

@@ -14,7 +14,7 @@ export abstract class BaseDetailsComponent<TModel extends BaseId> implements OnI
     protected destroyed$ = new Subject();
     protected data: TModel;
     public form: FormGroup;
-    protected id: number = -1;
+    protected id: string = "";
     protected isNew: boolean = true;
     public isReadOnly: boolean = true;
     protected refreshValidation: boolean = false;
@@ -40,7 +40,7 @@ export abstract class BaseDetailsComponent<TModel extends BaseId> implements OnI
 
     protected abstract getModelName(model: TModel): string;
 
-    protected abstract navigateToDetail(id: number): void;
+    protected abstract navigateToDetail(id: string): void;
     protected abstract navigateToList(): void;
 
     ngOnInit(): void {
@@ -121,13 +121,13 @@ export abstract class BaseDetailsComponent<TModel extends BaseId> implements OnI
     }
 
     protected handleRouteParamMap(paramMap: ParamMap) {
-        const id = +paramMap.get('id');
+        const id = paramMap.get('id');
 
         this.id = id;
 
         this.data = <TModel>{};
 
-        this.isNew = !this.id || this.id <= 0;
+        this.isNew = !this.id || this.id == "" || this.id == "new";
         this.isReadOnly = !this.isNew;
 
         if (this.isNew) {
@@ -154,7 +154,7 @@ export abstract class BaseDetailsComponent<TModel extends BaseId> implements OnI
             });
     }
 
-    private refreshData(id: number) {
+    private refreshData(id: string) {
         this.service
             .findById$(id)
             .subscribe(result => this.dataToForm(result));
@@ -196,7 +196,7 @@ export abstract class BaseDetailsComponent<TModel extends BaseId> implements OnI
     }
 
 
-    private handleCreatedWithSuccess(newId: number): void {
+    private handleCreatedWithSuccess(newId: string): void {
         const successMessage = this.createdWithSuccessMessage ? this.createdWithSuccessMessage : `${this.desc} creato con successo.`;
         this.notifier.success(successMessage);
         this.form.markAsPristine();

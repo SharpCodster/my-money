@@ -39,15 +39,6 @@
 				<input matInput type="number" placeholder="Ex. 2" formControlName="order" min="1" [readonly]="isReadOnly">
 				<mat-error *ngIf="form.controls.order.errors">{{getErrorMessage()}}</mat-error>
 			</mat-form-field>
-
-			<mat-form-field appearance="fill">
-				<mat-label>Tipo</mat-label>
-				<mat-select placeholder="Select Week" formControlName="accountType">
-					<mat-option *ngFor="let tipo in tipi" [value]="tipo">
-					  {{ tipo }}
-					</mat-option>
-				  </mat-select>
-			  </mat-form-field>
 	
 			<mat-form-field fxFlex color="accent" floatLabel="always" class="inputform-full-width">
 				<mat-label>Attivo</mat-label>

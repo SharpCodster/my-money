@@ -52,6 +52,11 @@ import { MatTreeModule } from '@angular/material/tree';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxColorsModule } from 'ngx-colors';
+import { CategoryGroupListComponent } from '../components/category-group-list/category-group-list.component';
+import { CategoryListComponent } from '../components/category-list/category-list.component';
+import { TagListComponent } from '../components/tag-list/tag-list.component';
+import { PayeeListComponent } from '../components/payee-list/payee-list.component';
+import { TransactionListComponent } from '../components/transaction-list/transaction-list.component';
 
 // import { SharedModule } from '../shared/shared.module';
 // import { appRoutes } from '../core/models/app-routes';
@@ -71,6 +76,21 @@ const shellRoutes: Routes = [
       { path: 'accounts', component: AccountsListComponent, canActivate: [AuthGuard] },
       { path: 'accounts/:id', component: AccountDetailsComponent, canActivate: [AuthGuard] },
       { path: 'accounts/new', component: AccountDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'categorygroups', component: CategoryGroupListComponent, canActivate: [AuthGuard] },
+      { path: 'categorygroups/:id', component: AccountDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'categorygroups/new', component: AccountDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'categories', component: CategoryListComponent, canActivate: [AuthGuard] },
+      { path: 'categories/:id', component: AccountDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'categories/new', component: AccountDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'tags', component: TagListComponent, canActivate: [AuthGuard] },
+      { path: 'tags/:id', component: AccountDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'tags/new', component: AccountDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'payees', component: PayeeListComponent, canActivate: [AuthGuard] },
+      { path: 'payees/:id', component: AccountDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'payees/new', component: AccountDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'transactions', component: TransactionListComponent, canActivate: [AuthGuard] },
+      { path: 'transactions/:id', component: AccountDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'transactions/new', component: AccountDetailsComponent, canActivate: [AuthGuard] },
     ]
   }
 ];
@@ -86,11 +106,16 @@ const shellRoutes: Routes = [
     DashboardComponent,
     AccountsListComponent,
     AccountDetailsComponent,
-    AccountDetailsIconDialog
+    AccountDetailsIconDialog,
+    CategoryGroupListComponent,
+    CategoryListComponent,
+    TagListComponent,
+    PayeeListComponent,
+    TransactionListComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(shellRoutes),
+    RouterModule.forChild(shellRoutes), 
     FormsModule, 
     ReactiveFormsModule,
     MatButtonModule,

@@ -1,7 +1,8 @@
-export class User {
-    id: number = 0;
-    username: string = '';
-    email: string = '';
-    token?: string = undefined;
-    expiration?: Date = undefined;
+
+
+export interface User {
+    id: string,
+    userName: string,
+    email: string,
+    roles: string[],
 }

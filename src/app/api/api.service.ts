@@ -42,7 +42,7 @@ export class ApiService {
     ) { }
   
     private getCommonHeaders(): { [key: string]: string; } {
-        const token = this.authService.currentUserValue.token;
+        const token = this.authService.currentUserValue.accessToken;
 
         return {
             'Authorization': `Bearer ${token}`,

@@ -6,14 +6,16 @@ import { User } from './user.model';
 import { ConfigurationService } from '../configuration/configuration.service';
 import { LoggerService } from '../logger/log.service';
 import * as moment from 'moment';
+import { UserLoginRequest } from './user-login-request.model';
+import { AuthResponse } from './auth-response.model';
 
 @Injectable({
     providedIn: 'root'
   })
 export class AuthService {
 
-    private currentUserSubject: BehaviorSubject<User>;
-    public currentUser: Observable<User>;
+    private currentUserSubject: BehaviorSubject<AuthResponse>;
+    public currentUser: Observable<AuthResponse>;
 
     constructor(private http: HttpClient,
         private config: ConfigurationService,
@@ -23,31 +25,43 @@ export class AuthService {
 
             let currentUserStr: string = localStorage.getItem('currentUser');
         
-            let currentUser: User = {
-                id: 0,
-                username: "",
-                email: "",
-                token: null,
-                expiration: null
+            let currentUser: AuthResponse = {
+                succeeded: false,
+                requiresTwoFactor: false,
+                accessToken: '',
+                accessTokenExpiration: null,
+                refreshToken: '',
+                refreshTokenExpiration: null,
+                user: {
+                    id: '',
+                    userName: '',
+                    email: '',
+                    roles: [],
+                }
             };
 
             if (currentUserStr) {
                 currentUser = JSON.parse(currentUserStr);
             }
 
-            this.currentUserSubject = new BehaviorSubject<User>(currentUser);
+            this.currentUserSubject = new BehaviorSubject<AuthResponse>(currentUser);
             this.currentUser = this.currentUserSubject.asObservable();
     }
 
-    public get currentUserValue(): User {
+    public get currentUserValue(): AuthResponse {
         return this.currentUserSubject.value;
     }
 
     login(username: string, password: string) {
         let loginUrl: string = this.config.get()?.loginUrl ?? '';
 
-        return this.http.post<any>(loginUrl, { username, password })
-            .pipe(map((user: any) => {
+        let loginRequest: UserLoginRequest = {
+            email: username,
+            password: password
+        };
+
+        return this.http.post<any>(loginUrl, loginRequest)
+            .pipe(map((user: AuthResponse) => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
@@ -63,8 +77,8 @@ export class AuthService {
 
     public isLoggedIn(): Promise<boolean> {
         const promise = new Promise<boolean>((resolve, reject) => {
-            if (this.currentUserValue.expiration != null) {
-                let isBefore: boolean = moment().isBefore(this.currentUserValue.expiration);
+            if (this.currentUserValue.accessTokenExpiration != null) {
+                let isBefore: boolean = moment().isBefore(this.currentUserValue.accessTokenExpiration);
                 resolve(isBefore);
             } else {
                 resolve(false);

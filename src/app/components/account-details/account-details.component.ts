@@ -11,7 +11,6 @@ import { BaseDetailsComponent } from '../../shared/components/base-detail.compon
 import { AccountService } from 'src/app/api/my-money/account.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AccountDetailsIconDialog, IconAndColorDialog } from './account-details-icon-dialog.component';
-import { AccountType, AccountTypeLabelMapping } from '../../core/models/account-type';
 
 @Component({
   selector: 'app-account-details',
@@ -19,8 +18,6 @@ import { AccountType, AccountTypeLabelMapping } from '../../core/models/account-
   styleUrls: ['./account-details.component.scss']
 })
 export class AccountDetailsComponent extends BaseDetailsComponent<Account> {
-
-  tipi: Record<AccountType, string> = AccountTypeLabelMapping
 
   constructor(
     protected notifier: NotifierService,
@@ -57,16 +54,13 @@ export class AccountDetailsComponent extends BaseDetailsComponent<Account> {
 
     protected createForm(): FormGroup { 
 
-      let fileTypes = Object.values(AccountType);
-
       const form = new FormGroup({
         order: new FormControl(0),
         name: new FormControl("", [Validators.required]),
         isActive: new FormControl(true),
         icon: new FormControl("bank"),
         color: new FormControl('#c32af3'),
-        type: new FormControl(1),
-        accountType: new FormControl(AccountType.Bank)
+        type: new FormControl(1)
       });
 
       this.enableValidationRefresh(form);
@@ -78,7 +72,7 @@ export class AccountDetailsComponent extends BaseDetailsComponent<Account> {
       return this.form.controls.name.value;
     }
 
-    protected navigateToDetail(id: number): void {
+    protected navigateToDetail(id: string): void {
       this.router.navigate(['accounts', id ]);
     }
 
