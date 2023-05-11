@@ -1,4 +1,4 @@
-import { HomePage, TasksPage, ProfilePage } from './pages';
+import { HomePage, TasksPage, ProfilePage, TreeViewPage } from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
 const routes = [
@@ -13,7 +13,11 @@ const routes = [
     {
         path: '/home',
         element: HomePage
-    }
+    }, 
+  {
+    path: '/tree-view',
+    element: TreeViewPage
+  }
 ];
 
 export default routes.map(route => {

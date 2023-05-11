@@ -17,5 +17,10 @@ export const navigation = [
         path: '/tasks'
       }
     ]
+  }, 
+  {
+    text: 'Tree View',
+    path: '/tree-view',
+    icon: 'hierarchy'
   }
   ];
