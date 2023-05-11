@@ -10,17 +10,35 @@ export const navigation = [
     items: [
       {
         text: 'Profile',
-        path: '/profile'
+        path: '/profile',
+        icon: 'folder',
       },
       {
         text: 'Tasks',
-        path: '/tasks'
+        path: '/tasks',
+        icon: 'folder',
       }
     ]
-  }, 
+  }, 
   {
     text: 'Tree View',
     path: '/tree-view',
     icon: 'hierarchy'
+  },   
+  {
+    text: 'Config',
+    icon: 'edit',
+    items: [
+      {
+        text: 'Tags',
+        path: '/tags',
+        icon: 'tags'
+      }, 
+      {
+        text: 'Payees',
+        path: '/payees',
+        icon: 'verticalaligntop'
+      }
+    ]
   }
   ];

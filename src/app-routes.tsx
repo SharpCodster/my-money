@@ -1,4 +1,4 @@
-import { HomePage, TasksPage, ProfilePage, TreeViewPage } from './pages';
+import { HomePage, TasksPage, ProfilePage, TreeViewPage, TagsPage, PayeesPage } from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
 const routes = [
@@ -17,6 +17,14 @@ const routes = [
   {
     path: '/tree-view',
     element: TreeViewPage
+  }, 
+  {
+    path: '/tags',
+    element: TagsPage
+  }, 
+  {
+    path: '/payees',
+    element: PayeesPage
   }
 ];
 
