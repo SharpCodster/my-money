@@ -40,5 +40,10 @@ export const navigation = [
         icon: 'verticalaligntop'
       }
     ]
+  }, 
+  {
+    text: 'Balance',
+    path: '/balance',
+    icon: 'doc'
   }
   ];

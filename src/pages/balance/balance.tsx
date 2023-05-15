@@ -1,15 +1,15 @@
 import React from 'react';
-import './tree-view.scss';
+import './balance.scss';
 import { TreeList, Column } from 'devextreme-react/tree-list';
 
 export default () => (
   <React.Fragment>
-    <h2 className={'content-block'}>Tree View</h2>
+    <h2 className={'content-block'}>Balance</h2>
     <div className={'content-block'}>
 
       <TreeList
         id="employees"
-        dataSource={employees}
+        dataSource={balance}
         defaultExpandedRowKeys={expandedRowKeys}
         showRowLines={true}
         showBorders={true}
@@ -19,18 +19,10 @@ export default () => (
       >
         <Column
           dataField="Title"
-          caption="Position" />
+          caption="Account" />
         <Column
-          dataField="Full_Name" />
-        <Column
-          dataField="City" />
-        <Column
-          dataField="State" />
-        <Column
-          dataField="Mobile_Phone" />
-        <Column
-          dataField="Hire_Date"
-          dataType="date" />
+          dataField="Full_Name" 
+          alignment='right'/>
       </TreeList>
 
     </div>
@@ -39,7 +31,7 @@ export default () => (
 
 const expandedRowKeys = [0];
 
-const employees = [{
+const balance = [{
   Full_Name: 'John Heart',
   Prefix: 'Mr.',
   Title: 'CEO',

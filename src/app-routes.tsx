@@ -1,4 +1,4 @@
-import { HomePage, TasksPage, ProfilePage, TreeViewPage, TagsPage, PayeesPage } from './pages';
+import { HomePage, TasksPage, ProfilePage, TreeViewPage, TagsPage, PayeesPage, BalancePage } from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
 const routes = [
@@ -25,6 +25,10 @@ const routes = [
   {
     path: '/payees',
     element: PayeesPage
+  }, 
+  {
+    path: '/balance',
+    element: BalancePage
   }
 ];
 
