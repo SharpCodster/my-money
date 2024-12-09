@@ -45,7 +45,7 @@ export class ConfigurationService {
 
   private createConfiguration(result: Configuration): Configuration {
     return {
-      apiUrl: this.urlHelper.trimTrailingSlash(result.apiUrl),
+      myMoneyApiUrl: this.urlHelper.trimTrailingSlash(result.myMoneyApiUrl),
       loginUrl: this.urlHelper.trimTrailingSlash(result.loginUrl) 
     };
   }

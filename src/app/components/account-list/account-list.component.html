@@ -16,21 +16,19 @@
   <div class="table-container">
     <table mat-table [dataSource]="dataSource">
 
-      <ng-container matColumnDef="order">
-        <th mat-header-cell *matHeaderCellDef> Ordine </th>
-        <td mat-cell *matCellDef="let element"> {{element.order}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="icon">
-        <th mat-header-cell *matHeaderCellDef> Icona </th>
-        <td mat-cell *matCellDef="let element" >
-          <mat-icon aria-hidden="false" aria-label="Example home icon" [ngStyle]="{'color': element.color }"> {{element.icon}} </mat-icon>
-        </td>
-      </ng-container>
-
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <th mat-header-cell *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="balanceSheetType">
+        <th mat-header-cell *matHeaderCellDef> Balance Sheet Type </th>
+        <td mat-cell *matCellDef="let element"> {{ element.balanceSheetType }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cashFlowType">
+        <th mat-header-cell *matHeaderCellDef> Cash Flow Type </th>
+        <td mat-cell *matCellDef="let element" > {{ element.cashFlowType }} </td>
       </ng-container>
 
       <ng-container matColumnDef="isActive">

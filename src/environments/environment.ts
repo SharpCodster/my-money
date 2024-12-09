@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  configurationUrl: 'http://localhost:55396/MyMoney/Configuration'
+  configurationUrl: 'http://localhost:55396/api/configuration'
 };
 
 /*

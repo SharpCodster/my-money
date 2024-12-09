@@ -1,5 +1,5 @@
 export class Configuration {
-    readonly apiUrl: string = '';
+    readonly myMoneyApiUrl: string = '';
     readonly loginUrl: string = '';
 }
   

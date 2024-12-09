@@ -26,7 +26,7 @@ import { DownloadResult, UploadInfo, HttpStatusCode } from './api.model';
 export class ApiService {
   
     public get baseUrl(): string {
-      return this.config.get().apiUrl;
+      return this.config.get().myMoneyApiUrl;
     }
   
     constructor(
